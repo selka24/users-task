@@ -1,11 +1,11 @@
 <template>
   <div id="app" class="p-3">
-    <users-table/>
+    <users-table id="user-table"/>
   </div>
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapState} from "vuex";
 import UsersTable from "./components/views/UsersTable.vue";
 export default {
   name: 'App',
@@ -16,6 +16,9 @@ export default {
   },
   components: {
     UsersTable,
+  },
+  computed:{
+    ...mapState(['loadSpinner'])
   },
   methods: {
     ...mapActions(['actGetUsers'])

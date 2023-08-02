@@ -48,7 +48,6 @@ const validationMessages = {
 }
 
 export const getErrorMsg = (label, validationInfo) => {
-    console.log(validationInfo, 'validationInfo')
     if(validationInfo.$error){
         for(let param in validationInfo.$params){
             if(!validationInfo[param]){

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <default-button @click="openForm">+ Create New User</default-button>
+    <div class="w-full flex">
+      <default-button @click="openForm" class="ml-auto">+ Create New User</default-button>
+    </div>
     <user-modal/>
     <default-table :columns="tableCells" :items="users">
      <template #act="{item}">
@@ -54,12 +56,10 @@ export default {
       } else {
         value = defaultUser
       }
-      console.log(flattenObj(value), 'editing user')
       this.mutState({key:'currUser', value: flattenObj(value)})
       this.mutUserModal()
     },
     deleteUser(user){
-      console.log(user.id, 'user id to delete');
       this.actDeleteUser(user);
     }
   }

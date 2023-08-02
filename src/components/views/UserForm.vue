@@ -41,12 +41,8 @@ export default {
     ...mapMutations(['mutState']),
     ...mapActions(['actCreateUser', 'actUpdateUser']),
     submit() {
-      console.log('submit!')
       this.$v.$touch()
-      if (this.$v.$invalid) {
-        console.log(this.$v, 'errrorrrrr');
-      } else {
-        console.log(this.gUserPrepareForInsert, 'successs');
+      if (!this.$v.$invalid) {
         if(this.currUser.id){
           this.actUpdateUser(this.gUserPrepareForInsert)
         } else {

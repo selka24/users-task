@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
+        loadSpinner: false,
         currUser: null,
         users: [],
         showUserModal: false
@@ -61,38 +62,44 @@ export default new Vuex.Store({
     },
     actions: {
         async actGetUsers({commit}) {
+            commit('mutState', {key: 'loadSpinner', value: true})
             const {data, error} = await apiClient.get('/users')
-            console.log(data, 'act get users')
             if(data){
                 commit('mutState', {key: 'users', value: data})
             } else {
                 alert(error)
             }
+            commit('mutState', {key: 'loadSpinner', value: false})
         },
         async actCreateUser({commit}, user){
+            commit('mutState', {key: 'loadSpinner', value: true})
             const {data, error} = await apiClient.post('/users', user)
             if(data){
                 commit('mutAddNewUser', data);
             } else {
                 alert(error)
             }
+            commit('mutState', {key: 'loadSpinner', value: false})
         },
         async actUpdateUser({commit}, user){
+            commit('mutState', {key: 'loadSpinner', value: true})
             const {data, error} = await apiClient.put(`/users/${user.id}`, user);
-            console.log(data, 'dataa', error);
             if(data){
                 commit('mutUpdateUser', data);
             } else {
                 alert(error)
             }
+            commit('mutState', {key: 'loadSpinner', value: false})
         },
         async actDeleteUser({commit}, user){
+            commit('mutState', {key: 'loadSpinner', value: true})
             const {data, error} = await apiClient.delete(`/users/${user.id}`);
             if(data){
                 commit('mutDeleteUser', user);
             }else {
                 alert(error)
             }
+            commit('mutState', {key: 'loadSpinner', value: false})
         }
     }
 });
