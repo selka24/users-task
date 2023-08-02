@@ -1,28 +1,33 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="p-3">
+    <users-table/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import {mapActions} from "vuex";
+import UsersTable from "./components/views/UsersTable.vue";
 export default {
   name: 'App',
+  data(){
+    return {
+      show:false
+    }
+  },
   components: {
-    HelloWorld
+    UsersTable,
+  },
+  methods: {
+    ...mapActions(['actGetUsers'])
+  },
+  async created() {
+     await this.actGetUsers();
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
   margin-top: 60px;
 }
 </style>
