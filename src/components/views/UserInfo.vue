@@ -39,9 +39,6 @@ export default {
     getErrorMsg,
     getInputProperties,
     ...mapMutations(['mutState']),
-    checkValidations(){
-      this.$v.touch()
-    },
     handleInfoChange(e){
       const {id, value} = e.target
       this.mutState({

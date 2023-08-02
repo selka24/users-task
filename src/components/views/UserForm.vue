@@ -38,16 +38,17 @@ export default {
     }
   },
   methods:{
-    ...mapMutations(['mutState']),
+    ...mapMutations(['mutState', 'mutUserModal']),
     ...mapActions(['actCreateUser', 'actUpdateUser']),
-    submit() {
+    async submit() {
       this.$v.$touch()
       if (!this.$v.$invalid) {
         if(this.currUser.id){
-          this.actUpdateUser(this.gUserPrepareForInsert)
+          await this.actUpdateUser(this.gUserPrepareForInsert)
         } else {
-          this.actCreateUser(this.gUserPrepareForInsert);
+          await this.actCreateUser(this.gUserPrepareForInsert);
         }
+        this.mutUserModal();
       }
     }
   }
